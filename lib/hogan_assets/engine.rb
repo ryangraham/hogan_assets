@@ -4,6 +4,7 @@ module HoganAssets
       HoganAssets::Config.load_yml! if HoganAssets::Config.yml_exists?
       Rails.application.config.assets.configure do |env|
         HoganAssets::Config.template_extensions.each do |ext|
+          env.register_mime_type 'application/javascript', extensions: [".#{ext}"]
           env.register_preprocessor(".#{ext}", Tilt)
         end
       end
